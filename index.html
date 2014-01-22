@@ -5,11 +5,12 @@
   <title>jQuery UI Sortable - Display as grid</title>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
   <script src="js/vendor/bootstrap.js"></script>
   <script src="js/vendor/jquery.mobile-1.4.0.js"></script>
-  <script src="js/zGrid.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
+  <script src="js/zGrid.js"></script>
 
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/zGrid.css">
@@ -51,6 +52,9 @@
           },
       },
     });
+
+    $( ".zGridItems" ).disableSelection();
+
     setInterval("clalcGrid($('.zGridItems'))", 50);
     });
 
