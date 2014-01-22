@@ -8,6 +8,7 @@
 
   <script src="js/vendor/bootstrap.js"></script>
   <script src="js/vendor/jquery.mobile-1.4.0.js"></script>
+  <script src="js/vendor/jquery.ui.touch-punch.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
   <script src="js/zGrid.js"></script>
@@ -61,7 +62,18 @@
   </script>
 </head>
 <body>
-<ul class="zGridItems" >
+
+<ul data-role="listview" data-inset="true" data-theme="d" id="sortable">
+      <li data-role="list-divider">List</li>
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+      <li>Item 4</li>
+      <li>Item 5</li>
+</ul>
+
+  
+<ul class="zGridItems"  >
 
   <li class="zGridItem" data-title="item2" data-width="1" >
     <div class="handle" ></div>
@@ -96,5 +108,18 @@
 
 </ul>
  
+
+
+  <script>
+  $(document).bind('pageinit', function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+    <!-- Refresh list to the end of sort to have a correct display -->
+    $( "#sortable" ).bind( "sortstop", function(event, ui) {
+      $('#sortable').listview('refresh');
+    });
+  });
+  </script>
+
 </body>
 </html>

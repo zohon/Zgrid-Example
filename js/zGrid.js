@@ -93,6 +93,7 @@
           $(tabArray).each(function(col, rows) {
 
             $(rows).each(function(row, data) {
+
               $(data).css({top:tailleItem*col, left:tailleItem*row});
             });
 
