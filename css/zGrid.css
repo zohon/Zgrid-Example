@@ -1,6 +1,7 @@
 
   .zGridItems {
     position: relative;
+    padding:0;
   }
 
   .zGridItems .zGridItem {

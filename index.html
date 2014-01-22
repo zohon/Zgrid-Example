@@ -4,6 +4,98 @@
   <meta charset="utf-8">
   <title>jQuery UI Sortable - Display as grid</title>
 
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/zGrid.css">
+
+  <style>
+    body {
+      background : #F2F2F2 !important;
+    }
+  </style>
+
+
+</head>
+<body>
+
+    <!-- Static navbar -->
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">zGrid.js</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#started">Getting started</a></li>
+            <li><a href="#customize">Customize</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Parametres <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#size">Size</a></li>
+                <li><a href="#col">Colonne</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Optional</li>
+                <li><a href="#handle">Handle</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="" >Jquery</a></li>
+            <li ><a href="">Boostrap</a></li>
+            <li class="active"><a href="">Piksel</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+    <div class="container">
+
+      <ul class="zGridItems"  >
+
+        <li class="zGridItem" data-title="item2" data-width="1" >
+          <div class="handle" ></div>
+          <div class="content">
+          
+          </div>
+        </li>
+
+        <li class="zGridItem" data-title="item3" data-width="2" >
+        <div class="handle" ></div>
+        </li>
+
+        <li class="zGridItem" data-title="item1" data-height="2"  >
+          <div class="handle" ></div>
+        </li>
+
+        <li class="zGridItem" data-title="item4" data-width="2" >
+        <div class="handle" ></div>
+        </li>
+
+        <li class="zGridItem" data-title="item5" data-width="2" >
+        <div class="handle" ></div>
+        </li>
+
+        <li class="zGridItem" data-title="item6" data-width="1" >
+        <div class="handle" ></div>
+        </li>
+
+        <li class="zGridItem" data-title="item7">
+        <div class="handle" ></div>
+        </li>
+
+      </ul>
+ 
+
+    </div> <!-- /container -->
+
+
+
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
   <script src="js/vendor/bootstrap.js"></script>
@@ -15,92 +107,15 @@
 
   <script src="js/zGrid.js"></script>
 
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/zGrid.css">
-
-  <style>
-    body {
-      background : #F2F2F2 !important;
-    }
-  </style>
-
   <script>
   $(function() {
 
-    tailleItem = 275;
-    col = 4;
-    
-    clalcGrid();
-
-    $('.zGridItems').sortable({ 
-      tolerance: "pointer",
-      revert : false,
-      handle: ".handle",
-      placeholder: {
-          element: function(clone, ui) {
-                if($(clone).attr('data-width')) {
-                  dataWidth = "data-width='"+$(clone).attr('data-width')+"'";
-                } else {
-                  dataWidth = "";
-                }
-                if($(clone).attr('data-height')) {
-                  dataHeight = "data-height='"+$(clone).attr('data-height')+"'";
-                } else {
-                  dataHeight = "";
-                }
-                return $('<li class="zGridItem highlight" '+dataWidth+' '+dataHeight+'></li>');
-          },
-          update: function() {
-            return true;
-          },
-      },
+    $( ".zGridItems" ).zGrid({
+        "size" : 275,
     });
 
-    $( ".zGridItems" ).disableSelection();
-
-    setInterval("clalcGrid($('.zGridItems'))", 50);
-    });
+  });
 
   </script>
-</head>
-<body>
-
-
-<ul class="zGridItems"  >
-
-  <li class="zGridItem" data-title="item2" data-width="1" >
-    <div class="handle" ></div>
-    <div class="content">
-    
-    </div>
-  </li>
-
-  <li class="zGridItem" data-title="item3" data-width="2" >
-  <div class="handle" ></div>
-  </li>
-
-  <li class="zGridItem" data-title="item1" data-height="2"  >
-    <div class="handle" ></div>
-  </li>
-
-  <li class="zGridItem" data-title="item4" data-width="2" >
-  <div class="handle" ></div>
-  </li>
-
-  <li class="zGridItem" data-title="item5" data-width="2" >
-  <div class="handle" ></div>
-  </li>
-
-  <li class="zGridItem" data-title="item6" data-width="1" >
-  <div class="handle" ></div>
-  </li>
-
-  <li class="zGridItem" data-title="item7">
-  <div class="handle" ></div>
-  </li>
-
-</ul>
- 
-
 </body>
 </html>

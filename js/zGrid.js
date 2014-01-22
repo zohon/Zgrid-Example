@@ -1,18 +1,85 @@
 
+$.fn.zGrid = function(params) {
+
+    if ( params && params.size) {
+      window.zGridSize = params.size;
+    }
+
+    if(params && params.handle) {
+      handle = params.handle;
+    } else {
+      handle = ".handle";
+    }
+
+    nameLi = "zGridItem";
+
+    $(this).sortable({ 
+      tolerance: "pointer",
+      revert : false,
+      handle: handle,
+      placeholder: {
+          element: function(clone, ui) {
+                if($(clone).attr('data-width')) {
+                  dataWidth = "data-width='"+$(clone).attr('data-width')+"'";
+                } else {
+                  dataWidth = "";
+                }
+                if($(clone).attr('data-height')) {
+                  dataHeight = "data-height='"+$(clone).attr('data-height')+"'";
+                } else {
+                  dataHeight = "";
+                }
+                return $('<li class="'+nameLi+' highlight" '+dataWidth+' '+dataHeight+'></li>');
+          },
+          update: function() {
+            return true;
+          },
+      },
+    });
+
+    window.onresize = function(event) {
+        clalcGrid($(this), true);
+    }
+
+    that = $(this);
+
+    setInterval(function() {
+      clalcGrid($(that));
+    }, 50);
+
+};
+
     function clalcGrid(target, force) {
 
-        if(!force && window.oldOrder && window.oldOrder == $(target).html() ) {
+        if(!force && window.zGridOlder && window.zGridOlder == $(target).html()) {
           return false;
         }
 
-        window.oldOrder = $(target).html();
+        if(!window.zGridSize) {
+          var zGridSize = Math.round($(target).width()/4);
+        } else {
+          var zGridSize = window.zGridSize;
+        }
+
+        zGridMinSize = 180;
+        if(zGridMinSize && zGridSize < zGridMinSize) {
+          zGridSize = zGridMinSize;
+        }
+
+        if(!window.zGridCol) {
+          var zGridCol = Math.round($(target).width()/zGridSize);
+        } else {
+          var zGridCol = window.zGridCol;
+        }
+
+        window.zGridOlder = $(target).html();
 
         tabArray = [];
         nextCol = 0;
         nextRow = 0;
 
-        if (col < 2) {
-          col = 2;
+        if (zGridCol < 2) {
+          zGridCol = 2;
         }
 
         $(target).find('li').each(function(index, gridItem) {
@@ -24,44 +91,43 @@
           item.name = $(gridItem).attr('data-title');
 
           if($(gridItem).attr('data-width')) {
-            item.width = $(gridItem).attr('data-width')*tailleItem;
+            item.width = $(gridItem).attr('data-width')*zGridSize;
             $(gridItem).css('width', item.width);
           } else {
             item.width = $(gridItem).width();
-            $(gridItem).css('width', tailleItem);
+            $(gridItem).css('width', zGridSize);
           }
 
           if($(gridItem).attr('data-height')) {
-            item.height = $(gridItem).attr('data-height')*tailleItem;
+            item.height = $(gridItem).attr('data-height')*zGridSize;
             $(gridItem).css('height', item.height);
           } else {
             item.height = $(gridItem).height();
-            $(gridItem).css('height', tailleItem);
+            $(gridItem).css('height', zGridSize);
           }
 
 
           // Calc nombre collone
-          if(item.height > tailleItem) {
-            nbCol = Math.round(item.height/tailleItem);
+          if(item.height > zGridSize) {
+            nbCol = Math.round(item.height/zGridSize);
           } else {
             nbCol =1;
           }
 
           // Calc nombre row
-
-          if(item.width > tailleItem) {
-            nbRow = Math.round(item.width/tailleItem);
+          if(item.width > zGridSize) {
+            nbRow = Math.round(item.width/zGridSize);
           } else {
             nbRow = 1;
           }
 
           // Calc prochaine position accessible
-          resultRow = getNextRow(tabArray, nextRow, nextCol, nbRow);
+          resultRow = getNextRow(tabArray, nextRow, nextCol, nbRow, zGridCol);
 
           nextRow = resultRow.nextRow;
           nextCol = resultRow.nextCol;
 
-          if(nextRow+nbRow > col) {
+          if(nextRow+nbRow > zGridCol) {
             nextRow = 0;
             nextCol++;
           }
@@ -94,7 +160,7 @@
 
             $(rows).each(function(row, data) {
 
-              $(data).css({top:tailleItem*col, left:tailleItem*row});
+              $(data).css({top:zGridSize*col, left:zGridSize*row});
             });
 
 
@@ -106,11 +172,11 @@
 
 
 
-    function getNextRow(tabArray, nextRow, nextCol, nbRow) {
+    function getNextRow(tabArray, nextRow, nextCol, nbRow, zGridCol) {
 
       allPosLibre = false;
 
-      if(nextRow+nbRow > col) {
+      if(nextRow+nbRow > zGridCol) {
         nextRow = 0;
         nextCol++;
       }
@@ -125,7 +191,7 @@
 
         while(allPosLibre != true) {
 
-          if(position.row > col) {
+          if(position.row > zGridCol) {
             position.row = 0;
             position.col++;
           }
@@ -137,7 +203,7 @@
             position.rowSearch = position.row+addRow;
             position.colSearch = position.col;
 
-            if(position.rowSearch > col) {
+            if(position.rowSearch > zGridCol) {
               position.row = 0;
               position.col++;
             }
