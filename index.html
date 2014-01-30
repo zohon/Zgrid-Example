@@ -33,16 +33,6 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#started">Getting started</a></li>
             <li><a href="#customize">Customize</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Parametres <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#size">Size</a></li>
-                <li><a href="#col">Colonne</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Optional</li>
-                <li><a href="#handle">Handle</a></li>
-              </ul>
-            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="" >Jquery</a></li>
@@ -56,53 +46,177 @@
 
     <div class="container">
 
-      <ul class="zGridItems"  >
 
-        <li class="zGridItem" data-title="item2" data-width="1" >
-          <div class="handle" ></div>
-          <div class="content">
-          
+      <div class="bs-callout bs-callout-danger" id="started">
+        <h4>Getting started</h4>
+        <h5>Dependancy</h5>
+        <p><a href="http://jquery.com/">Jquery</a> - <a href="http://jqueryui.com/">Jquery-ui</a></p>
+        <pre><code class="html">&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"&gt;&lt;/script&gt;</code></pre>
+
+        <p><a href="http://touchpunch.furf.com/">jquery.ui.touch-punch.js</a></p>
+        <pre><code class="html">&lt;script src="js/vendor/jquery.ui.touch-punch.js"&gt;&lt;/script&gt;</code></pre>
+
+        <p><a href="zGrid.js">zGrid.js</a></p>
+        <pre><code class="html">&lt;script src="js/vendor/zGrid.js"&gt;&lt;/script&gt;</code></pre>
+
+        <h5>Liste content</h5>
+
+        <pre><code class="html">&lt;ul class="zGridItems" &gt;
+  &lt;li class="zGridItem" data-width="1" data-height="2"&gt;
+    &lt;div class="handle" &gt;&lt;/div&gt;
+    &lt;div class="content"&gt;&lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+    
+        <h5>Initialise zGrid.js</h5>
+
+        <pre><code class="html">$(function() {
+  $( ".zGridItems" ).zGrid();
+});</code></pre>     
+      </div>
+
+      <div class="row" id="customize">
+        <div class="col-md-12"><h4>Customize</h4></div>
+      </div>
+
+      <br />
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-addon">Size</span>
+            <input type="text" class="form-control" id="changeSize">
           </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-addon">Col</span>
+            <input type="text" class="form-control" id="changeCol">
+          </div>
+        </div>      
+      </div>
+      <br />
+
+      <div class="row">
+        <div class="col-md-12">
+          <pre><code class="html">var paramSortable = ;</code></pre>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <pre><code class="html">window.zGridElement = $( ".zGridItems" ).zGrid({
+    //  size : <span class="gridelementSize">275</span>,  // define the size of your widgets
+    //  col : <span class="gridelementCol">4</span>, // define the number of col of the grid
+    //  handle : ".handle", // define the target for the handle
+    //  sortable : {        // parameters of jquery.sortable
+          connectWith: ".zGridItems", // to connect multiples grid
+        },
+});</code></pre>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="row">
+
+        <div class="col-md-12" id="AddItemInfo">
+
+            <div class="btn-group height-select">
+              <button type="" class="btn btn-default disabled">Height :</button>
+              <button type="button" class="btn btn-default active">1</button>
+              <button type="button" class="btn btn-default">2</button>
+              <button type="button" class="btn btn-default">3</button>
+            </div>
+
+            <div class="btn-group width-select">
+              <button type="" class="btn btn-default disabled">Width :</button>
+              <button type="button" class="btn btn-default active">1</button>
+              <button type="button" class="btn btn-default">2</button>
+              <button type="button" class="btn btn-default">3</button>
+            </div>
+
+            <button type="button" class="btn btn-success addItemAppend" style="">Append Item</button>
+            <button type="button" class="btn btn-success addItemPrepend" style="">Prepend Item</button>
+          </div>
+      </div>
+
+      <br />
+
+      <div class="row">
+          <div class="col-md-12" >
+            <pre><code class="html">window.zGridElement.serialize(); // return all html object</code></pre>
+          </div>          
+      </div>
+
+      <div class="row">
+          <div class="col-md-1" >
+            <button type="button" class="btn btn-success showSerialize" style="">Serialize</button>
+          </div>
+          <div class="col-md-11" >
+            <input type="text" class="form-control" id="showSerializeInput">
+          </div>          
+      </div>
+
+
+      <br />
+      <div class="row">
+
+      <ul class="zGridItems col-md-12" id="zGridItems">
+
+       <li class="zGridItem" data-id="1" data-title="item1" data-width="2" data-height="1"  >
+          <div class="handle"></div>
         </li>
 
-        <li class="zGridItem" data-title="item3" data-width="2" >
-        <div class="handle" ></div>
+        <li class="zGridItem" data-id="2" data-title="item1" data-width="2" data-height="1"  >
+          <div class="handle"></div>
         </li>
 
-        <li class="zGridItem" data-title="item1" data-height="2"  >
-          <div class="handle" ></div>
+        <li class="zGridItem" data-id="3" data-title="item3" data-height="1" data-width="2" >
+          <div class="handle"></div>
         </li>
 
-        <li class="zGridItem" data-title="item4" data-width="2" >
-        <div class="handle" ></div>
-        </li>
-
-        <li class="zGridItem" data-title="item5" data-width="2" >
-        <div class="handle" ></div>
-        </li>
-
-        <li class="zGridItem" data-title="item6" data-width="1" >
-        <div class="handle" ></div>
-        </li>
-
-        <li class="zGridItem" data-title="item7">
-        <div class="handle" ></div>
+        <li class="zGridItem" data-id="4" data-title="item6" data-width="1" >
+          <div class="handle"></div>
         </li>
 
       </ul>
- 
+    </div>
+    <div class="row">
+      <h3 class="col-md-12">Grid 2</h3>
+    </div>
+    <br />
+    <div class="row">
+
+      <ul class="zGridItems col-md-12" id="zGridItems2" style="border-top:5px solid #FFF;">
+
+        <li class="zGridItem" data-id="5" data-title="item2" data-width="1"  data-height="1">
+          <div class="handle" ></div>
+          <div class="content"></div>
+        </li>
+
+        <li class="zGridItem" data-id="6" data-title="item2" data-width="1"  data-height="1">
+          <div class="handle" ></div>
+          <div class="content"></div>
+        </li>
+
+
+      </ul>
+
+      </div>
 
     </div> <!-- /container -->
 
 
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-  <script src="js/vendor/bootstrap.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+ 
   <!-- <script src="js/vendor/jquery.mobile-1.4.0.js"></script> -->
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
+  <script src="js/vendor/bootstrap.js"></script>
   <script src="js/vendor/jquery.ui.touch-punch.js"></script>
 
   <script src="js/zGrid.js"></script>
@@ -110,11 +224,114 @@
   <script>
   $(function() {
 
-    $( ".zGridItems" ).zGrid({
-        "size" : 275,
+
+    window.zGridElement = $( ".zGridItems" ).zGrid({
+      size : 290,
+      //col :2,
+      sortable : {
+        connectWith: ".zGridItems",
+      },
+      update: function() { // on grid update
+        showSerialize(); 
+      }
+    });
+
+    // formulaire Customize
+    $( "#changeSize" ).keyup(function(zGridElement) {
+      window.zGridElement.set('size', parseInt($(this).val()));
+      window.zGridElement.set('col', null);
+      $( "#changeCol" ).val(null);
+    });
+
+    $( "#changeCol" ).keyup(function(zGridElement) {
+      window.zGridElement.set('col', parseInt($(this).val()));
+      window.zGridElement.set('size', null);
+      $( "#changeSize" ).val(null);
+    });
+
+    $('.addItemAppend').click(function(zGridElement) {
+
+      var height = $('#AddItemInfo .height-select .active').html();
+      var width = $('#AddItemInfo .width-select .active').html();
+
+      var target = addWidget(width, height);
+
+      $('html, body').animate({
+        scrollTop: ($(target).offset().top)-50
+      }, 500);
+
+    });
+
+    $('.addItemPrepend').click(function(zGridElement) {
+
+      var height = $('#AddItemInfo .height-select .active').html();
+      var width = $('#AddItemInfo .width-select .active').html();
+
+      var target = addWidget(width, height, 'prepend');
+
+      $('html, body').animate({
+        scrollTop: ($(target).offset().top)-50
+      }, 500);
+
+    });    
+
+    $('.height-select button').click(function() {
+      $('.height-select button').removeClass('active');
+      $(this).addClass('active');
+    });
+
+    $('.width-select button').click(function() {
+      $('.width-select button').removeClass('active');
+      $(this).addClass('active');
+    });
+
+    $('.showSerialize').click(function() {
+      showSerialize();
     });
 
   });
+
+  function showSerialize() {
+    var tabSerializes = window.zGridElement.serialize();
+    var resultat = new Array();
+
+    $.each( tabSerializes, function( key, value ) {
+      $.each( this, function( key, value ) {
+        if($(this).attr('data-id')) {
+          resultat.push($(this).attr('data-id'));
+        } else {
+
+        }
+      });
+    });
+
+    $('#showSerializeInput').val(JSON.stringify(resultat));
+  }
+
+  function addWidget(width, height, pos) {
+    
+    var li = document.createElement("li");
+    $(li).addClass('zGridItem');
+
+    $(li).attr('data-id', $('.zGridItem').length+1);
+
+    if (width) {
+      $(li).attr('data-width', width);
+    }
+
+    if (height) {
+      $(li).attr('data-height', height);
+    }
+
+    var div = document.createElement("div");
+    $(div).addClass('handle');
+    $(li).append(div);
+
+    window.zGridElement.add($(li), pos);
+
+    showSerialize();
+    return $(li);
+  }
 
   </script>
 </body>

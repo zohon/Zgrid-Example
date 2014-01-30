@@ -1,4 +1,5 @@
 
+
   .zGridItems {
     position: relative;
     padding:0;
@@ -40,8 +41,11 @@
     display: block;
     height: 20px;
     width: 100%;
+    cursor: -moz-grab;
   }
-
+  .zGridItems .ui-sortable-helper .handle  {
+    cursor: -moz-grabbing;
+  }
   .zGridItems .zGridItem  .content {
     padding-top: 20px
   }
