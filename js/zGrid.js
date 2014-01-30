@@ -5,6 +5,10 @@ $.fn.zGrid = function(params) {
 
       this.params = {};
 
+      this.separator = 5;
+
+      this.childLi = "."+$(this).find('li:first').attr('class');
+
       if ( params && params.size) {
         this.params.size = params.size;
       }
@@ -29,7 +33,7 @@ $.fn.zGrid = function(params) {
 
       } else {
 
-        if(params.attrId) {
+        if(this.params.attrId) {
           this.params.attrId = params.attrId;
         } else {
           this.params.attrId = 'data-id';
@@ -73,7 +77,7 @@ $.fn.zGrid = function(params) {
           },
         };
 
-        if (params.sortable) {
+        if (params && params.sortable) {
           var paramSortable = $.extend( paramSortable, params.sortable );
         }
 
@@ -91,7 +95,6 @@ $.fn.zGrid = function(params) {
 
     this.clalcGrid = function(force) {
 
-
         if( !force && this.zGridOlder && this.zGridOlder == $(this).html()) {
           return false;
         }
@@ -107,7 +110,7 @@ $.fn.zGrid = function(params) {
         } else {
           var maximumWidth = 1;
 
-          $(this).find('li[data-width]').each(function(index, item) {
+          $(this).find(this.childLi+'[data-width]').each(function(index, item) {
             var value = parseFloat($(this).attr('data-width'));
             maximumWidth = (value > maximumWidth) ? value : maximumWidth;
           });
@@ -136,7 +139,7 @@ $.fn.zGrid = function(params) {
 
         var that = this;
 
-        $(that).find('li').each(function(index, gridItem) {
+        $(that).find(this.childLi).each(function(index, gridItem) {
 
         if(!$(gridItem).hasClass("ui-sortable-helper")) {
 
@@ -146,6 +149,7 @@ $.fn.zGrid = function(params) {
 
           if($(gridItem).attr('data-width')) {
             item.width = $(gridItem).attr('data-width')*zGridSize;
+            item.height += ($(gridItem).attr('data-width')-1)*that.separator;
             $(gridItem).css('width', item.width);
           } else {
             item.width = $(gridItem).width();
@@ -154,6 +158,9 @@ $.fn.zGrid = function(params) {
 
           if($(gridItem).attr('data-height')) {
             item.height = $(gridItem).attr('data-height')*zGridSize;
+
+            item.height += ($(gridItem).attr('data-height')-1)*that.separator;
+
             $(gridItem).css('height', item.height);
           } else {
             item.height = $(gridItem).height();
@@ -219,7 +226,11 @@ $.fn.zGrid = function(params) {
 
             $(rows).each(function(row, data) {
 
-              var retourCss = $(data).css({top:zGridSize*col, left:zGridSize*row});
+
+              targetTop = (zGridSize+that.separator)*col;
+              targetLeft = (zGridSize+that.separator)*row;
+
+              var retourCss = $(data).css({top:targetTop, left:targetLeft});
               maxTop = zGridSize*col;
 
               if($(data).html() != undefined) { // on verifie que c'est un item HTML
@@ -269,11 +280,11 @@ $.fn.zGrid = function(params) {
     }
 
     this.update = function() {
-      console.log('init update');
+
     }
 
     this.stop = function() {
-      console.log('init stop');
+
     }    
 
     this.serialize = function() {
